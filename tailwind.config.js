@@ -9,6 +9,7 @@ export default {
       colors: {
         primary: '#17191e',
         background: '#f9f9f9',
+        headertext: '#53565e',
         surface: '#ffffff',
         error: '#ff4d4f',
         success: '#47be7d'
