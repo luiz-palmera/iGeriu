@@ -14,6 +14,9 @@ export default {
         error: '#ff4d4f',
         success: '#47be7d'
       },
+      fontFamily: {
+        sans: ['Inter', 'sans-serif'],
+      },
     }
   },
   plugins: [],
