@@ -11,7 +11,7 @@ import {
   MagnifyingGlassIcon
 } from "@heroicons/react/24/outline";
 import { UserCircleIcon } from "@heroicons/react/16/solid";
-import { NavLink } from "./NavLink";
+import NavLink from "./NavLink";
 
 
 const navLinks = [
@@ -29,7 +29,7 @@ const Header = () => {
   return (
     <header className="bg-primary border-b-2 border-headerContent">
       <div className="container mx-auto px-4 h-16">
-        <div className="flex items-center justify-center space-x-4 h-full">      
+        <div className="flex items-center justify-center space-x-6 h-full">      
           <h1 className="text-2xl font-bold text-background">iGeriu</h1>
           <nav className="hidden md:flex h-full">
             {navLinks.map((link) => (
@@ -38,7 +38,7 @@ const Header = () => {
               </NavLink>
             ))}
           </nav>
-          <div className="flex items-center space-x-4">
+          <div className="flex items-center space-x-2">
             <MagnifyingGlassIcon className="text-headerContentHover w-5 h-5"/>
             <BellAlertIcon className="text-headerContentHover w-5 h-5"/>
             <UserCircleIcon className="text-headerContentHover w-5 h-5"/>

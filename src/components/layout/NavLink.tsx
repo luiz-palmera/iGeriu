@@ -6,7 +6,7 @@ type NavLinkProps = {
     icon: React.ReactNode;
 }
 
-export const NavLink = ({href, children, icon}: NavLinkProps) => {
+const NavLink = ({href, children, icon}: NavLinkProps) => {
     return(
         <a 
             href={href}
@@ -19,3 +19,5 @@ export const NavLink = ({href, children, icon}: NavLinkProps) => {
         </a>
     )
 }
+
+export default NavLink
