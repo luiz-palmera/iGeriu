@@ -1,11 +1,11 @@
 import { Cog6ToothIcon } from "@heroicons/react/24/outline";
-import { Table } from "./Table";
-import { TableHead } from "./TableHead";
-import { TableCell } from "./TableCell";
-import { TableRow } from "./TableRow";
-import { InvoiceStatus } from "./InvoiceStatus";
-import Pagination from "./Pagination";
 import { useState } from "react";
+import { Table } from "./components/Table";
+import { TableHead } from "./components/TableHead";
+import { TableCell } from "./components/TableCell";
+import { TableRow } from "./components/TableRow";
+import { InvoiceStatus } from "./components/InvoiceStatus";
+import { Pagination } from "./components/Pagination";
 
 
 type Invoice = {
