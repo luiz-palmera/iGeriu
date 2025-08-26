@@ -1,17 +1,14 @@
-import Content from "../components/layout/Content";
-import Header from "../components/layout/Header";
+import { FaceSmileIcon } from "@heroicons/react/24/outline";
 
-const Home = () => {
+
+export const Home = () => {
   return (
     <>
-    <Header />
-    <div className="min-h-screen bg-gradient-to-b from-primary from-25% to-background to-25% flex justify-center py-10">
-        <Content>
-          placeholder
-        </Content>
-    </div>
+        <div className="flex flex-col items-center justify-center h-full">
+            <span>Seja bem vindo ao iGeriu</span>
+            <FaceSmileIcon className="animate-pulse h-10 w-10"/>
+            <span>Acesse suas faturas e gerencie sua conta</span>
+        </div>
     </>
   );
 };
-
-export default Home;

@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 
 type NavLinkProps = {
     href: string;
@@ -8,15 +9,15 @@ type NavLinkProps = {
 
 const NavLink = ({href, children, icon}: NavLinkProps) => {
     return(
-        <a 
-            href={href}
+        <Link
+            to={href}
             className={
                 'h-full flex items-center px-3 text-xs text-headerContent hover:text-headerContentHover hover:border-b-2 border-headerContentHover space-x-0.5'
             }
         >
             <span>{icon}</span>
             <span>{children}</span>
-        </a>
+        </Link>
     )
 }
 

@@ -15,17 +15,17 @@ import NavLink from "./NavLink";
 
 
 const navLinks = [
-  { label: "Início", href: "#", icon:<HomeIcon className="h-5 w-5"/> },
+  { label: "Início", href: "/", icon:<HomeIcon className="h-5 w-5"/> },
   { label: "Clientes", href: "#", icon:<UserIcon className="h-5 w-5"/> },
   { label: "Pedidos", href: "#", icon:<ClipboardDocumentCheckIcon className="h-5 w-5"/> },
-  { label: "Faturas", href: "#", icon:<BanknotesIcon className="h-5 w-5"/> },
+  { label: "Faturas", href: "faturas", icon:<BanknotesIcon className="h-5 w-5"/> },
   { label: "Financeiro", href: "#", icon:<CurrencyDollarIcon className="h-5 w-5"/> },
   { label: "Assinaturas", href: "#", icon:<ArrowPathIcon className="h-5 w-5"/> },
   { label: "Tickets", href: "#", icon:<ChatBubbleLeftRightIcon className="h-5 w-5"/> },
   { label: "Relatórios", href: "#", icon:<ChartPieIcon className="h-5 w-5"/> },
 ];
 
-const Header = () => {
+export const Header = () => {
   return (
     <header className="bg-primary border-b-2 border-headerContent">
       <div className="container mx-auto px-4 h-16">
@@ -47,6 +47,5 @@ const Header = () => {
       </div>
     </header>
   );
-    }
+}
 
-    export default Header;
