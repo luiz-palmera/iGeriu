@@ -11,9 +11,13 @@ export default {
         background: '#f9f9f9',
         headerContent: '#61646c',
         headerContentHover: '#9c9eaa',
+        tableHeader:'#f5f5f5',
+        text: '#9699ac',
         surface: '#ffffff',
         error: '#ff4d4f',
-        success: '#47be7d'
+        success: '#47be7d',
+        button: '#eef6ff',
+        buttonText: '#469bff',
       },
       fontFamily: {
         sans: ['Inter', 'sans-serif'],
