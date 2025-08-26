@@ -29,7 +29,7 @@ export const Header = () => {
   return (
     <header className="bg-primary border-b-2 border-headerContent">
       <div className="container mx-auto px-4 h-16">
-        <div className="flex items-center justify-center space-x-6 h-full">      
+        <div className="flex items-center justify-center space-x-28 h-full">      
           <h1 className="text-2xl font-bold text-background">iGeriu</h1>
           <nav className="hidden md:flex h-full">
             {navLinks.map((link) => (
