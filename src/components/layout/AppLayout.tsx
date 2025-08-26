@@ -6,7 +6,7 @@ export const AppLayout = () => {
   return (
     <>
     <Header />
-    <div className="min-h-screen bg-gradient-to-b from-primary from-25% to-background to-25% flex justify-center py-10">
+    <div className="min-h-screen bg-gradient-to-b from-primary from-25% to-background to-25% flex justify-center py-10 px-4">
         <Content>
             <Outlet />
         </Content>

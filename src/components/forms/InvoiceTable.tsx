@@ -4,6 +4,8 @@ import { TableHead } from "./TableHead";
 import { TableCell } from "./TableCell";
 import { TableRow } from "./TableRow";
 import { InvoiceStatus } from "./InvoiceStatus";
+import Pagination from "./Pagination";
+import { useState } from "react";
 
 
 type Invoice = {
@@ -30,40 +32,56 @@ const invoices: Invoice[] = [
 ];
 
 export const InvoicesTable = () => {
+  const [currentPage, setCurrentPage] = useState(1);
+  const rowsPerPage = 10;
+
+  const totalPages = Math.ceil(invoices.length / rowsPerPage);
+  const paginatedInvoices = invoices.slice(
+    (currentPage - 1) * rowsPerPage,
+    currentPage * rowsPerPage
+  );
   return (
-        <Table>
-          <TableHead>
-            <TableCell header className="w-18 text-xs">ID</TableCell>
-            <TableCell header className="w-44 text-xs">Cliente</TableCell>
-            <TableCell header className="w-48 text-xs">Data de geração</TableCell>
-            <TableCell header className="w-52 text-xs">Vencimento da fatura</TableCell>
-            <TableCell header className="w-52 text-xs">Data de Pagamento</TableCell>
-            <TableCell header className="w-32 text-xs">Total</TableCell>
-            <TableCell header className="w-72 text-xs">Método de pagamento</TableCell>
-            <TableCell header className="w-36 text-xs">Status da Fatura</TableCell>
-            <TableCell header className="w-20 text-xs ">Ações</TableCell>
-          </TableHead>
-          <tbody>
-            {invoices.map((invoice) => (
-              <TableRow key={invoice.id}>
-                <TableCell>{invoice.id}</TableCell>
-                <TableCell>{invoice.client}</TableCell>
-                <TableCell>{invoice.issueDate}</TableCell>
-                <TableCell>{invoice.dueDate}</TableCell>
-                <TableCell>{invoice.paymentDate ?? "-"}</TableCell>
-                <TableCell>{invoice.total}</TableCell>
-                <TableCell>{invoice.method}</TableCell>
-                <TableCell>
-                    <InvoiceStatus status={invoice.status}/>
-                </TableCell>
-                <td className="px-4 py-2">
-                  <button className="p-2 hover:bg-gray-100 rounded-full">
-                    <Cog6ToothIcon className="h-6 w-6" />
-                  </button>
-                </td>
-              </TableRow>
-            ))}
-          </tbody>
-        </Table>
+        <>
+          <Table>
+            <TableHead>
+              <TableCell header className="w-18 text-xs">ID</TableCell>
+              <TableCell header className="w-44 text-xs">Cliente</TableCell>
+              <TableCell header className="w-48 text-xs">Data de geração</TableCell>
+              <TableCell header className="w-52 text-xs">Vencimento da fatura</TableCell>
+              <TableCell header className="w-52 text-xs">Data de Pagamento</TableCell>
+              <TableCell header className="w-32 text-xs">Total</TableCell>
+              <TableCell header className="w-72 text-xs">Método de pagamento</TableCell>
+              <TableCell header className="w-36 text-xs">Status da Fatura</TableCell>
+              <TableCell header className="w-20 text-xs ">Ações</TableCell>
+            </TableHead>
+            <tbody>
+              {paginatedInvoices.map((invoice) => (
+                <TableRow key={invoice.id}>
+                  <TableCell>{invoice.id}</TableCell>
+                  <TableCell>{invoice.client}</TableCell>
+                  <TableCell>{invoice.issueDate}</TableCell>
+                  <TableCell>{invoice.dueDate}</TableCell>
+                  <TableCell>{invoice.paymentDate ?? "-"}</TableCell>
+                  <TableCell>{invoice.total}</TableCell>
+                  <TableCell>{invoice.method}</TableCell>
+                  <TableCell>
+                      <InvoiceStatus status={invoice.status}/>
+                  </TableCell>
+                  <td className="px-4 py-2">
+                    <button className="p-2 hover:bg-gray-100 rounded-full">
+                      <Cog6ToothIcon className="h-6 w-6" />
+                    </button>
+                  </td>
+                </TableRow>
+              ))}
+            </tbody>
+          </Table>
+          <Pagination 
+            currentPage={currentPage}
+            totalPages={totalPages}
+            onPageChange={setCurrentPage}
+          />
+
+        </>
   );
 }
