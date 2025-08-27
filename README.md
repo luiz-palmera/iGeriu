@@ -11,6 +11,7 @@ O objetivo é avaliar a organização de código, estruturação de componentes 
 - Exibe dois **cards de navegação** para acessar as telas:
   - **Listagem de Faturas**
   - **Conta Digital**
+  - **Também é possivel navegar pelo header apenas as abas de Faturas e Financeiro estão ativas**
 
 ### 📄 Tela de Faturas
 - Tabela com listagem de faturas contendo:
