@@ -1,12 +1,12 @@
 import { useState } from "react";
-import { Table } from "./components/Table";
-import { TableHead } from "./components/TableHead";
-import { TableCell } from "./components/TableCell";
-import { TableRow } from "./components/TableRow";
-import { InvoiceStatus } from "./components/InvoiceStatus";
-import { Pagination } from "./components/Pagination";
-import { ActionMenu } from "../../ui/ActionMenu";
+import { Table } from "../ui/Table/Table";
+import { TableHead } from "../ui/Table/TableHead";
+import { TableCell } from "../ui/Table/TableCell";
+import { TableRow } from "../ui/Table/TableRow";
+import { InvoiceStatus } from "./InvoiceStatus";
+import { Pagination } from "../forms/Pagination";
 import { motion } from "framer-motion";
+import { ActionMenu } from "../ui/ActionMenu";
 
 
 type Invoice = {

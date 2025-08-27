@@ -1,8 +1,8 @@
-type Props = {
+type InvoiceStatusProps = {
   status: "Pago" | "Não pago" | "Cancelada";
 };
 
-export const InvoiceStatus = ({ status }: Props) => {
+export const InvoiceStatus = ({ status }: InvoiceStatusProps) => {
   const color =
     status === "Pago"
       ? "bg-success text-surface"
