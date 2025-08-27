@@ -135,6 +135,11 @@ const transactions: Transaction[] = [
 
 ---
 
+> **Nota 1:** Todos os commits foram realizados diretamente na branch `main` devido ao **prazo curto do projeto** e pelo fato de ter sido desenvolvido **individualmente**.  
+> **Nota 2:** O **design da tabela de faturas** foi **inspirado nas referências do sistema iGeriu**, enquanto o **design da tela de conta digital** foi **criado do zero, sem referências prévias**.
+
+---
+
 ## 🚀 Como rodar o projeto
 
 ### Pré-requisitos
