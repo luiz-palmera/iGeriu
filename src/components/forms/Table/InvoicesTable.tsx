@@ -1,4 +1,3 @@
-import { Cog6ToothIcon } from "@heroicons/react/24/outline";
 import { useState } from "react";
 import { Table } from "./components/Table";
 import { TableHead } from "./components/TableHead";
@@ -6,6 +5,8 @@ import { TableCell } from "./components/TableCell";
 import { TableRow } from "./components/TableRow";
 import { InvoiceStatus } from "./components/InvoiceStatus";
 import { Pagination } from "./components/Pagination";
+import { ActionMenu } from "../../ui/ActionMenu";
+import { motion } from "framer-motion";
 
 
 type Invoice = {
@@ -54,7 +55,15 @@ export const InvoicesTable = () => {
               <TableCell header className="w-36 text-xs">Status da Fatura</TableCell>
               <TableCell header className="w-20 text-xs ">Ações</TableCell>
             </TableHead>
-            <tbody>
+            <motion.tbody
+              initial="hidden"
+              animate="visible"
+              variants={{
+                visible: {
+                  transition: { staggerChildren: 0.05 }
+                }
+              }}
+            >
               {paginatedInvoices.map((invoice) => (
                 <TableRow key={invoice.id}>
                   <TableCell>{invoice.id}</TableCell>
@@ -67,14 +76,12 @@ export const InvoicesTable = () => {
                   <TableCell>
                       <InvoiceStatus status={invoice.status}/>
                   </TableCell>
-                  <td className="px-4 py-2">
-                    <button className="p-2 hover:bg-gray-100 rounded-full">
-                      <Cog6ToothIcon className="h-6 w-6" />
-                    </button>
+                  <td className="px-4 py-2 relative">
+                      <ActionMenu />
                   </td>
                 </TableRow>
               ))}
-            </tbody>
+            </motion.tbody>
           </Table>
           <Pagination 
             currentPage={currentPage}

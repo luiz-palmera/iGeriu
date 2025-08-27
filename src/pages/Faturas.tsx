@@ -1,6 +1,6 @@
 import { ArrowUpOnSquareIcon, FunnelIcon } from "@heroicons/react/24/outline";
 import { IconButton } from "../components/ui/IconButton";
-import { InvoicesTable } from "../components/forms/Table/InvoiceTable";
+import { InvoicesTable } from "../components/forms/Table/InvoicesTable";
 
 
 export const Faturas = () => {
