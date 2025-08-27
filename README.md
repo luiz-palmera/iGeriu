@@ -1,69 +1,156 @@
-# React + TypeScript + Vite
+# iGeriu - Teste Técnico
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Este projeto foi desenvolvido como parte do teste técnico solicitado.  
+O objetivo é avaliar a organização de código, estruturação de componentes e solução de telas em **React + TypeScript + TailwindCSS**.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## ✨ Funcionalidades implementadas
 
-## Expanding the ESLint configuration
+### 🏠 Tela inicial
+- Exibe dois **cards de navegação** para acessar as telas:
+  - **Listagem de Faturas**
+  - **Conta Digital**
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### 📄 Tela de Faturas
+- Tabela com listagem de faturas contendo:
+  - ID do cliente
+  - Nome do cliente
+  - Data de geração
+  - Data de vencimento
+  - Data de pagamento (quando houver)
+  - Valor total
+  - Método de pagamento
+  - Status da fatura
+- **Menu de ações** (mock): exibe opções como marcar como paga, visualizar detalhes, baixar PDF etc.  
+  > ⚠️ As ações são apenas ilustrativas e **não alteram os dados da tabela**, servindo como exemplo de UI.
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
+
+### 💳 Tela de Conta Digital
+- Exibição do **saldo disponível**.
+- Ações de:
+  - **Solicitar saque** (transação fica marcada como *pendente*).
+  - **Depositar**.
+  - **Adicionar limite de saldo**.
+- Configuração de **saques automáticos** (ativar/desativar e valor-alvo).
+- Histórico de transações em formato de tabela:
+  - Possibilidade de filtrar por **pendentes** ou **concluídas**.
+
+---
+
+## 📦 Dados Mockados
+
+Este projeto utiliza **dados mockados** para simular o comportamento do sistema sem depender de um backend real.  
+Os dados foram definidos em **arrays estáticos** e são utilizados em dois contextos principais:
+
+---
+
+### 1) Uso direto dentro de componentes (ex.: **Tabela de Faturas**)
+- As **faturas** são carregadas diretamente dentro do componente que renderiza a tabela.
+- Isso permite que o componente funcione de forma independente, simulando a **listagem** como se viesse de uma API.
+- O **menu de Ações** é apenas visual (mock), **não altera** o estado real da tabela.
+
+**Exemplo:**
+~~~ts
+type Invoice = {
+  id: number;
+  clienteId: string;
+  clienteNome: string;
+  dataGeracao: string;
+  dataVencimento: string;
+  dataPagamento: string | null;
+  valor: number;
+  metodoPagamento: string;
+  status: "Pago" | "Pendente" | "Atrasada";
+};
+
+const invoices: Invoice[] = [
   {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
+    id: 1,
+    clienteId: "C001",
+    clienteNome: "João Silva",
+    dataGeracao: "2025-07-01",
+    dataVencimento: "2025-07-15",
+    dataPagamento: "2025-07-10",
+    valor: 1200,
+    metodoPagamento: "Cartão de Crédito",
+    status: "Pago",
   },
-])
-```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config([
-  globalIgnores(['dist']),
   {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
+    id: 2,
+    clienteId: "C002",
+    clienteNome: "Maria Souza",
+    dataGeracao: "2025-07-05",
+    dataVencimento: "2025-07-20",
+    dataPagamento: null,
+    valor: 800,
+    metodoPagamento: "Boleto",
+    status: "Pendente",
   },
-])
-```
+];
+~~~
+
+---
+
+### 2) Uso **passado como parâmetro** (ex.: **Transações da Conta Digital**)
+- As **transações** são definidas em um módulo/arquivo separado e **injetadas via props** nos componentes (ex.: tabela de extrato).
+- Favorece **reutilização** e **testabilidade**, permitindo trocar o dataset facilmente.
+
+**Exemplo:**
+~~~ts
+type Transaction = {
+  id: number;
+  tipo: "Depósito" | "Saque";
+  valor: number;
+  status: "Pendente" | "Concluída";
+  data: string;
+};
+
+const transactions: Transaction[] = [
+  { id: 1, tipo: "Depósito", valor: 500, status: "Concluída", data: "2025-08-01" },
+  { id: 2, tipo: "Saque", valor: 200, status: "Pendente",  data: "2025-08-05" },
+];
+
+<TransactionTable data={transactions} />
+~~~
+
+**Comportamento simulado:**
+- **Saldo** é calculado considerando **apenas transações concluídas** (depósitos – saques).
+- **Solicitar saque** adiciona uma transação com `status: "Pendente"` (não afeta o saldo até concluir).
+- **Depositar** adiciona uma transação com `status: "Concluída"` (atualiza saldo imediatamente).
+- Filtros por **Todas / Pendentes / Concluídas** são aplicados sobre o array mockado.
+
+---
+
+### ✅ Benefícios
+- Permite **testar UI e interações** sem backend.
+- Facilita a migração para API real: basta **substituir os arrays por chamadas** (ex.: Inertia/Laravel) mantendo os mesmos contratos de dados.
+
+
+## 🛠️ Tecnologias utilizadas
+- **React**
+- **TypeScript**
+- **TailwindCSS**
+- **Framer Motion** (animações de cards e transições)
+
+---
+
+## 🚀 Como rodar o projeto
+
+### Pré-requisitos
+- Node.js >= 18
+- npm ou yarn ou pnpm
+
+### Passos
+```bash
+# Clonar o repositório
+git clone <url-do-repo>
+
+# Entrar na pasta do projeto
+cd igeriu
+
+# Instalar dependências
+npm install
+
+# Rodar em modo desenvolvimento
+npm run dev
