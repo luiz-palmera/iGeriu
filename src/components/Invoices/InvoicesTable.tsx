@@ -88,7 +88,6 @@ export const InvoicesTable = () => {
             totalPages={totalPages}
             onPageChange={setCurrentPage}
           />
-
         </>
   );
 }

@@ -6,9 +6,10 @@ import { CurrencyDollarIcon } from "@heroicons/react/24/solid";
 type CardSaldoProps = {
   saldo: number;
   onSolicitarSaque: () => void;
+  onDepositar: () => void;
 }
 
-export const CardBalance =({saldo, onSolicitarSaque}: CardSaldoProps) => {
+export const CardBalance =({saldo, onSolicitarSaque, onDepositar}: CardSaldoProps) => {
   return (
     <motion.div
       layout
@@ -28,7 +29,7 @@ export const CardBalance =({saldo, onSolicitarSaque}: CardSaldoProps) => {
                 </span>
                 <div className="flex space-x-4">
                   <Button onClick={onSolicitarSaque} text="Solicitar Saque"/>
-                  <Button onClick={onSolicitarSaque} text="Depositar"/>
+                  <Button onClick={onDepositar} text="Depositar"/>
                 </div>
             </div>
         </div>
