@@ -4,7 +4,7 @@ import { TableHead } from "../ui/Table/TableHead";
 import { TableCell } from "../ui/Table/TableCell";
 import { TableRow } from "../ui/Table/TableRow";
 import { InvoiceStatus } from "./InvoiceStatus";
-import { Pagination } from "../forms/Pagination";
+import { Pagination } from "../ui/Table/Pagination";
 import { motion } from "framer-motion";
 import { ActionMenu } from "../ui/ActionMenu";
 
