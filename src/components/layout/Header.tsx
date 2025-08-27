@@ -12,6 +12,7 @@ import {
 } from "@heroicons/react/24/outline";
 import { UserCircleIcon } from "@heroicons/react/16/solid";
 import NavLink from "./NavLink";
+import IgeriuLogo from "../../assets/igeriu.svg";
 
 
 const navLinks = [
@@ -30,7 +31,7 @@ export const Header = () => {
     <header className="bg-primary border-b-2 border-headerContent">
       <div className="container mx-auto px-4 h-16">
         <div className="flex items-center justify-center space-x-28 h-full">      
-          <h1 className="text-2xl font-bold text-background">iGeriu</h1>
+          <img src={IgeriuLogo} alt="iGeriu Logo" className="h-8"/>
           <nav className="hidden md:flex h-full">
             {navLinks.map((link) => (
               <NavLink key={link.label} href={link.href} icon={link.icon}>
