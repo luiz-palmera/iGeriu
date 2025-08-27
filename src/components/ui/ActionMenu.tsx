@@ -1,19 +1,21 @@
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Cog6ToothIcon } from "@heroicons/react/24/outline";
-import { useToast } from "./Toast/ToastContainer";
 
-export const ActionMenu = () => {
+export type Actions = {
+    label: string;
+    onClick: () => void;
+};
+
+type ActionMenuProps = {
+    actions: Actions[];
+    icon?: boolean;
+    children?: React.ReactNode;
+}
+
+export const ActionMenu = ({actions, icon = true, children}: ActionMenuProps) => {
     const [open, setOpen] = useState(false);
     const menuRef = useRef<HTMLDivElement>(null);
-    const { addToast, ToastContainer } = useToast();
-
-    const actions = [
-        { label: "Visualizar detalhes", onClick: () => addToast("Detalhes da fatura exibidos.") },
-        { label: "Baixar fatura", onClick: () => addToast("Download efetuado com sucesso.") },
-        { label: "Marcar como paga", onClick: () => addToast("Fatura marcada como paga.") },
-        { label: "Cancelar fatura", onClick: () => addToast("Fatura cancelada.") },
-    ];
 
     const cellVariants = {
         hidden: { opacity: 0, y: 10 },
@@ -37,9 +39,9 @@ export const ActionMenu = () => {
       <motion.div variants={cellVariants} ref={menuRef} className="relative inline-block text-left">
         <button
             onClick={() => setOpen(!open)}
-            className="p-2 rounded-full hover:bg-gray-200 transition"
+            className={`${icon ? "p-2 rounded-full hover:bg-gray-200 transition": ""}`}
         >
-          <Cog6ToothIcon className="w-5 h-5" />
+          {icon ? (<Cog6ToothIcon className="w-5 h-5" />) : children}
         </button>
 
         <AnimatePresence>
@@ -69,7 +71,6 @@ export const ActionMenu = () => {
           )}
         </AnimatePresence>
       </motion.div>
-      <ToastContainer />
     </>
   );
 };

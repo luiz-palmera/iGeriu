@@ -6,7 +6,8 @@ import { TableRow } from "../ui/Table/TableRow";
 import { InvoiceStatus } from "./InvoiceStatus";
 import { Pagination } from "../ui/Table/Pagination";
 import { motion } from "framer-motion";
-import { ActionMenu } from "../ui/ActionMenu";
+import { ActionMenu, type Actions } from "../ui/ActionMenu";
+import { useToast } from "../ui/Toast/ToastContainer";
 
 
 type Invoice = {
@@ -36,11 +37,20 @@ export const InvoicesTable = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const rowsPerPage = 10;
 
-  const totalPages = Math.ceil(invoices.length / rowsPerPage);
-  const paginatedInvoices = invoices.slice(
-    (currentPage - 1) * rowsPerPage,
-    currentPage * rowsPerPage
-  );
+  const {addToast, ToastContainer} = useToast();
+  
+      const actions:Actions[] = [
+          { label: "Visualizar detalhes", onClick: () => addToast("Detalhes da fatura exibidos.") },
+          { label: "Baixar fatura", onClick: () => addToast("Download efetuado com sucesso.") },
+          { label: "Marcar como paga", onClick: () => addToast("Fatura marcada como paga.") },
+          { label: "Cancelar fatura", onClick: () => addToast("Fatura cancelada.") },
+      ];
+
+      const totalPages = Math.ceil(invoices.length / rowsPerPage);
+      const paginatedInvoices = invoices.slice(
+        (currentPage - 1) * rowsPerPage,
+        currentPage * rowsPerPage
+      );
   return (
         <>
           <Table>
@@ -77,7 +87,7 @@ export const InvoicesTable = () => {
                       <InvoiceStatus status={invoice.status}/>
                   </TableCell>
                   <td className="px-4 py-2 relative">
-                      <ActionMenu />
+                      <ActionMenu actions={actions} />
                   </td>
                 </TableRow>
               ))}
@@ -88,6 +98,7 @@ export const InvoicesTable = () => {
             totalPages={totalPages}
             onPageChange={setCurrentPage}
           />
+          <ToastContainer />
         </>
   );
 }

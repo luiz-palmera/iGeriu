@@ -16,7 +16,7 @@ export const CardBalance =({saldo, onSolicitarSaque, onDepositar}: CardSaldoProp
       initial={{ opacity: 0, y: -10 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.3 }}
-      className={`p-6 bg-surface shadow-xl rounded-xl w-[22rem] h-[14rem] flex items-center justify-start`}
+      className={`p-6 bg-surface shadow-[0_4px_12px_rgba(0,0,0,0.08)] rounded-xl w-[22rem] h-[14rem] flex items-center justify-start`}
     >
         <div className="flex items-start justify-between flex-col w-full">
             <div className="flex flex-col space-y-6 w-full">
