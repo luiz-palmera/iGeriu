@@ -13,6 +13,7 @@ export default {
         headerContentHover: '#9c9eaa',
         tableHeader:'#f5f5f5',
         text: '#9699ac',
+        darkText: '#343f4f',
         surface: '#ffffff',
         error: '#ff4d4f',
         success: '#47be7d',

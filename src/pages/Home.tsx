@@ -1,13 +1,15 @@
 import { motion } from "framer-motion";
 import { Card } from "../components/ui/Card";
 import { BanknotesIcon, CurrencyDollarIcon } from "@heroicons/react/24/outline";
+import { useEffect } from "react";
+import type { ScreenTitleProps } from "../components/layout/AppLayout";
 
 const container = {
   hidden: { opacity: 0 },
   show: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.2, // 👈 intervalo entre cada card
+      staggerChildren: 0.2,
     },
   },
 };
@@ -17,7 +19,12 @@ const item = {
   show: { opacity: 1, y: 0 },
 };
 
-export const Home = () => {
+export const Home = ({ onTitleChange }: ScreenTitleProps) => {
+
+  useEffect(() => {
+    onTitleChange("Dashboard");
+  }, [onTitleChange]);
+
   return (
     <div className="flex flex-col items-start justify-start h-full p-8 space-y-12">
       <div>
@@ -39,7 +46,7 @@ export const Home = () => {
             title="Consultar Faturas"
             description="Confira as últimas dicas para aproveitar ao máximo sua conta digital."
             icon={<BanknotesIcon className="h-12 w-12 text-primary inline-block" />}
-            href="/faturas"
+            href="/invoices"
           />
         </motion.div>
 

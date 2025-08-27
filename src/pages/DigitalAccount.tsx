@@ -14,7 +14,13 @@ const transactionsMock: Transaction[] = [
   { id: "#T003", date: "20/08/2025", description: "Saque solicitado", amount: "R$ -300,00", status: "Pendente" },
 ];
 
-export default function DigitalAccount({ transactions = transactionsMock }: { transactions?: Transaction[] }) {
+export type ScreenTitleFunction = (title: string, subtitle?: string) => void;
+type DigitalAccountProps = {
+  transactions?: Transaction[];
+  onTitleChange?: ScreenTitleFunction;
+};
+
+export default function DigitalAccount({ transactions = transactionsMock, onTitleChange }: DigitalAccountProps) {
   const [saldo, setSaldo] = useState(1283.75);
   const [transactionsState, setTransactionsState] = useState<Transaction[]>(transactions);
   const { addToast, ToastContainer } = useToast();
@@ -30,6 +36,10 @@ export default function DigitalAccount({ transactions = transactionsMock }: { tr
 
   const [autoWithdrawEnabled, setAutoWithdrawEnabled] = useState(false);
   const [withdrawTarget, setWithdrawTarget] = useState<number | null>(null);
+
+  useEffect(() => {
+    onTitleChange?.("Financeiro", "Conta Digital");
+  }, [onTitleChange]);
 
   useEffect(() => {
     setCurrentPage(1);
